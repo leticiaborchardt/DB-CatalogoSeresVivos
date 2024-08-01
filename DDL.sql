@@ -16,35 +16,35 @@ CREATE TABLE reino (
 CREATE TABLE filo (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    reino_id INTEGER NOT NULL REFERENCES reino(id)
+    id_reino INTEGER NOT NULL REFERENCES reino(id)
 );
 
 -- Tabela Classe
 CREATE TABLE classe (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    filo_id INTEGER NOT NULL REFERENCES filo(id)
+    id_filo INTEGER NOT NULL REFERENCES filo(id)
 );
 
 -- Tabela Ordem
 CREATE TABLE ordem (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    classe_id INTEGER NOT NULL REFERENCES classe(id)
+    id_classe INTEGER NOT NULL REFERENCES classe(id)
 );
 
 -- Tabela Família
 CREATE TABLE familia (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    ordem_id INTEGER NOT NULL REFERENCES ordem(id)
+    id_ordem INTEGER NOT NULL REFERENCES ordem(id)
 );
 
 -- Tabela Gênero
 CREATE TABLE genero (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
-    familia_id INTEGER NOT NULL REFERENCES familia(id)
+    id_familia INTEGER NOT NULL REFERENCES familia(id)
 );
 
 -- Tabela Espécie
@@ -146,63 +146,63 @@ INSERT INTO reino (nome) VALUES ('Viroids');
 INSERT INTO reino (nome) VALUES ('Prions');
 
 -- Inserts para a tabela Filo
-INSERT INTO filo (nome, reino_id) VALUES ('Chordata', 1);
-INSERT INTO filo (nome, reino_id) VALUES ('Arthropoda', 1);
-INSERT INTO filo (nome, reino_id) VALUES ('Mollusca', 1);
-INSERT INTO filo (nome, reino_id) VALUES ('Bryophyta', 2);
-INSERT INTO filo (nome, reino_id) VALUES ('Pteridophyta', 2);
-INSERT INTO filo (nome, reino_id) VALUES ('Ascomycota', 3);
-INSERT INTO filo (nome, reino_id) VALUES ('Basidiomycota', 3);
-INSERT INTO filo (nome, reino_id) VALUES ('Ciliophora', 4);
-INSERT INTO filo (nome, reino_id) VALUES ('Euglenozoa', 4);
+INSERT INTO filo (nome, id_reino) VALUES ('Chordata', 1);
+INSERT INTO filo (nome, id_reino) VALUES ('Arthropoda', 1);
+INSERT INTO filo (nome, id_reino) VALUES ('Mollusca', 1);
+INSERT INTO filo (nome, id_reino) VALUES ('Bryophyta', 2);
+INSERT INTO filo (nome, id_reino) VALUES ('Pteridophyta', 2);
+INSERT INTO filo (nome, id_reino) VALUES ('Ascomycota', 3);
+INSERT INTO filo (nome, id_reino) VALUES ('Basidiomycota', 3);
+INSERT INTO filo (nome, id_reino) VALUES ('Ciliophora', 4);
+INSERT INTO filo (nome, id_reino) VALUES ('Euglenozoa', 4);
 
 -- Inserts para a tabela Classe
-INSERT INTO classe (nome, filo_id) VALUES ('Mammalia', 1);
-INSERT INTO classe (nome, filo_id) VALUES ('Aves', 1);
-INSERT INTO classe (nome, filo_id) VALUES ('Insecta', 2);
-INSERT INTO classe (nome, filo_id) VALUES ('Gastropoda', 3);
-INSERT INTO classe (nome, filo_id) VALUES ('Bryopsida', 4);
-INSERT INTO classe (nome, filo_id) VALUES ('Polypodiopsida', 5);
-INSERT INTO classe (nome, filo_id) VALUES ('Saccharomycetes', 6);
-INSERT INTO classe (nome, filo_id) VALUES ('Agaricomycetes', 7);
-INSERT INTO classe (nome, filo_id) VALUES ('Oligohymenophorea', 8);
-INSERT INTO classe (nome, filo_id) VALUES ('Kinetoplastea', 9);
+INSERT INTO classe (nome, id_filo) VALUES ('Mammalia', 1);
+INSERT INTO classe (nome, id_filo) VALUES ('Aves', 1);
+INSERT INTO classe (nome, id_filo) VALUES ('Insecta', 2);
+INSERT INTO classe (nome, id_filo) VALUES ('Gastropoda', 3);
+INSERT INTO classe (nome, id_filo) VALUES ('Bryopsida', 4);
+INSERT INTO classe (nome, id_filo) VALUES ('Polypodiopsida', 5);
+INSERT INTO classe (nome, id_filo) VALUES ('Saccharomycetes', 6);
+INSERT INTO classe (nome, id_filo) VALUES ('Agaricomycetes', 7);
+INSERT INTO classe (nome, id_filo) VALUES ('Oligohymenophorea', 8);
+INSERT INTO classe (nome, id_filo) VALUES ('Kinetoplastea', 9);
 
 -- Inserts para a tabela Ordem
-INSERT INTO ordem (nome, classe_id) VALUES ('Primates', 1);
-INSERT INTO ordem (nome, classe_id) VALUES ('Carnivora', 1);
-INSERT INTO ordem (nome, classe_id) VALUES ('Passeriformes', 2);
-INSERT INTO ordem (nome, classe_id) VALUES ('Coleoptera', 3);
-INSERT INTO ordem (nome, classe_id) VALUES ('Stylommatophora', 4);
-INSERT INTO ordem (nome, classe_id) VALUES ('Bryales', 5);
-INSERT INTO ordem (nome, classe_id) VALUES ('Polypodiales', 6);
-INSERT INTO ordem (nome, classe_id) VALUES ('Saccharomycetales', 7);
-INSERT INTO ordem (nome, classe_id) VALUES ('Agaricales', 8);
-INSERT INTO ordem (nome, classe_id) VALUES ('Hymenostomatida', 9);
+INSERT INTO ordem (nome, id_classe) VALUES ('Primates', 1);
+INSERT INTO ordem (nome, id_classe) VALUES ('Carnivora', 1);
+INSERT INTO ordem (nome, id_classe) VALUES ('Passeriformes', 2);
+INSERT INTO ordem (nome, id_classe) VALUES ('Coleoptera', 3);
+INSERT INTO ordem (nome, id_classe) VALUES ('Stylommatophora', 4);
+INSERT INTO ordem (nome, id_classe) VALUES ('Bryales', 5);
+INSERT INTO ordem (nome, id_classe) VALUES ('Polypodiales', 6);
+INSERT INTO ordem (nome, id_classe) VALUES ('Saccharomycetales', 7);
+INSERT INTO ordem (nome, id_classe) VALUES ('Agaricales', 8);
+INSERT INTO ordem (nome, id_classe) VALUES ('Hymenostomatida', 9);
 
 -- Inserts para a tabela Família
-INSERT INTO familia (nome, ordem_id) VALUES ('Hominidae', 1);
-INSERT INTO familia (nome, ordem_id) VALUES ('Felidae', 2);
-INSERT INTO familia (nome, ordem_id) VALUES ('Turdidae', 3);
-INSERT INTO familia (nome, ordem_id) VALUES ('Carabidae', 4);
-INSERT INTO familia (nome, ordem_id) VALUES ('Helicidae', 5);
-INSERT INTO familia (nome, ordem_id) VALUES ('Bryaceae', 6);
-INSERT INTO familia (nome, ordem_id) VALUES ('Polypodiaceae', 7);
-INSERT INTO familia (nome, ordem_id) VALUES ('Saccharomycetaceae', 8);
-INSERT INTO familia (nome, ordem_id) VALUES ('Agaricaceae', 9);
-INSERT INTO familia (nome, ordem_id) VALUES ('Parameciidae', 10);
+INSERT INTO familia (nome, id_ordem) VALUES ('Hominidae', 1);
+INSERT INTO familia (nome, id_ordem) VALUES ('Felidae', 2);
+INSERT INTO familia (nome, id_ordem) VALUES ('Turdidae', 3);
+INSERT INTO familia (nome, id_ordem) VALUES ('Carabidae', 4);
+INSERT INTO familia (nome, id_ordem) VALUES ('Helicidae', 5);
+INSERT INTO familia (nome, id_ordem) VALUES ('Bryaceae', 6);
+INSERT INTO familia (nome, id_ordem) VALUES ('Polypodiaceae', 7);
+INSERT INTO familia (nome, id_ordem) VALUES ('Saccharomycetaceae', 8);
+INSERT INTO familia (nome, id_ordem) VALUES ('Agaricaceae', 9);
+INSERT INTO familia (nome, id_ordem) VALUES ('Parameciidae', 10);
 
 -- Inserts para a tabela Gênero
-INSERT INTO genero (nome, familia_id) VALUES ('Homo', 1);
-INSERT INTO genero (nome, familia_id) VALUES ('Panthera', 2);
-INSERT INTO genero (nome, familia_id) VALUES ('Turdus', 3);
-INSERT INTO genero (nome, familia_id) VALUES ('Carabus', 4);
-INSERT INTO genero (nome, familia_id) VALUES ('Helix', 5);
-INSERT INTO genero (nome, familia_id) VALUES ('Bryum', 6);
-INSERT INTO genero (nome, familia_id) VALUES ('Polypodium', 7);
-INSERT INTO genero (nome, familia_id) VALUES ('Saccharomyces', 8);
-INSERT INTO genero (nome, familia_id) VALUES ('Agaricus', 9);
-INSERT INTO genero (nome, familia_id) VALUES ('Paramecium', 10);
+INSERT INTO genero (nome, id_familia) VALUES ('Homo', 1);
+INSERT INTO genero (nome, id_familia) VALUES ('Panthera', 2);
+INSERT INTO genero (nome, id_familia) VALUES ('Turdus', 3);
+INSERT INTO genero (nome, id_familia) VALUES ('Carabus', 4);
+INSERT INTO genero (nome, id_familia) VALUES ('Helix', 5);
+INSERT INTO genero (nome, id_familia) VALUES ('Bryum', 6);
+INSERT INTO genero (nome, id_familia) VALUES ('Polypodium', 7);
+INSERT INTO genero (nome, id_familia) VALUES ('Saccharomyces', 8);
+INSERT INTO genero (nome, id_familia) VALUES ('Agaricus', 9);
+INSERT INTO genero (nome, id_familia) VALUES ('Paramecium', 10);
 
 -- Inserts para a tabela Espécie
 INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
