@@ -26,7 +26,7 @@ INNER JOIN especie_localizacao el ON el.id_especie = e.id
 INNER JOIN localizacao l ON el.id_localizacao = l.id
 INNER JOIN localizacao_bioma lb ON lb.id_localizacao = l.id
 INNER JOIN bioma b ON b.id = lb.id_bioma
-WHERE b.nome = 'Cerrado' AND area_protegida = TRUE AND e.nome_comum = 'Onça-pintada'
+WHERE b.nome = 'Cerrado' AND area_protegida = TRUE AND e.nome_comum = 'Onça-pintada';
 
 -- 1.c) Quais espécies de plantas são endêmicas da Mata Atlântica e estão ameaçadas de extinção?
 SELECT e.nome_cientifico, e.nome_comum
@@ -197,3 +197,4 @@ ORDER BY altitude, g.nome;
 
 -- Views extras
 SELECT * FROM view_especies_por_localizacao;
+SELECT * FROM view_regiao_geografica_especies_ameacadas;
