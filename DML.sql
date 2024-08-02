@@ -113,6 +113,51 @@ WHERE
 
 
 -- Casos de uso (extra):
+-- 1. Biólogo Estudando a Impacto do Desmatamento em Primatas:
+SELECT
+    d.nome AS doenca,
+    d.descricao,
+    ed.taxa_mortalidade
+FROM
+    doenca d
+        INNER JOIN
+    especie_doenca ed ON d.id = ed.id_doenca
+        INNER JOIN
+    especie e ON ed.id_especie = e.id
+        INNER JOIN
+    especie_localizacao el ON e.id = el.id_especie
+        INNER JOIN
+    localizacao l ON el.id_localizacao = l.id
+        INNER JOIN
+    genero g ON e.id_genero = g.id
+        INNER JOIN
+    familia f ON g.id_familia = f.id
+        INNER JOIN
+    ordem o ON f.id_ordem = o.id
+WHERE
+    l.area_protegida = FALSE
+  AND o.nome = 'Primates';
+
+-- 2. Bióloga Estudando a Distribuição Geográfica de Uma Espécie Invasora:
+SELECT
+    e.nome_cientifico AS especie_nativa,
+    e.nome_comum AS nome_comum_nativa,
+    ie.tipo AS tipo_interacao,
+    ie.descricao AS descricao_interacao
+FROM
+    especie e
+        INNER JOIN
+    especie_localizacao el ON e.id = el.id_especie
+        INNER JOIN
+    localizacao l ON el.id_localizacao = l.id
+        INNER JOIN
+    interacao_ecologica ie ON e.id = ie.id_especie1 OR e.id = ie.id_especie2
+WHERE
+    l.nome = 'Rio X'
+  AND e.id != (SELECT id FROM especie WHERE nome_cientifico = 'Pterygoplichthys pardalis')
+  AND (ie.id_especie1 = (SELECT id FROM especie WHERE nome_cientifico = 'Pterygoplichthys pardalis')
+    OR ie.id_especie2 = (SELECT id FROM especie WHERE nome_cientifico = 'Pterygoplichthys pardalis'));
+
 -- 3. Biólogo Conservacionista Analisando o Status de Conservação de Répteis
 SELECT
     DISTINCT(e.nome_cientifico),

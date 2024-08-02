@@ -194,7 +194,7 @@ INSERT INTO familia (nome, id_ordem) VALUES ('Saccharomycetaceae', 8);
 INSERT INTO familia (nome, id_ordem) VALUES ('Agaricaceae', 9);
 INSERT INTO familia (nome, id_ordem) VALUES ('Parameciidae', 10);
 INSERT INTO familia (nome, id_ordem) VALUES ('Viperidae', 11);
-INSERT INTO familia (nome, ordem_id) VALUES ('Tyrannidae', 3);
+INSERT INTO familia (nome, id_ordem) VALUES ('Tyrannidae', 3);
 
 -- Inserts para a tabela Gênero
 INSERT INTO genero (nome, id_familia) VALUES ('Homo', 1);
@@ -208,8 +208,8 @@ INSERT INTO genero (nome, id_familia) VALUES ('Saccharomyces', 8);
 INSERT INTO genero (nome, id_familia) VALUES ('Agaricus', 9);
 INSERT INTO genero (nome, id_familia) VALUES ('Paramecium', 10);
 INSERT INTO genero (nome, id_familia) VALUES ('Bothrops', 11);
-INSERT INTO genero (nome, familia_id) VALUES ('Tyrannus', 12);
-INSERT INTO genero (nome, familia_id) VALUES ('Elaenia', 12);
+INSERT INTO genero (nome, id_familia) VALUES ('Tyrannus', 12);
+INSERT INTO genero (nome, id_familia) VALUES ('Elaenia', 12);
 
 -- Inserts para a tabela Espécie
 INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total) VALUES 
@@ -228,7 +228,11 @@ INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_c
 ('Elaenia cristata', 'Maria-cavaleira', 'Uma ave encontrada em áreas montanhosas.', 13, 'Pouco Preocupante', '2024-08-01 00:00:00', 300),
 ('Ramphastos toco', 'Tucano-toco', 'Pássaro de grande porte, nativo da Amazônia', 5, 'Pouco preocupante', '2023-10-01 00:00:00', 500000),
 ('Panthera onca', 'Onça-pintada', 'Maior felino das Américas, encontrado em florestas tropicais como a Amazônia', 2, 'Vulnerável', '2023-10-01 00:00:00', 15000),
-('Bertholletia excelsa', 'Castanheira-do-pará', 'Árvore amazônica conhecida por suas castanhas comestíveis', 7, 'Vulnerável', '2023-10-01 00:00:00', 200000);
+('Bertholletia excelsa', 'Castanheira-do-pará', 'Árvore amazônica conhecida por suas castanhas comestíveis', 7, 'Vulnerável', '2023-10-01 00:00:00', 200000),
+('Alouatta caraya', 'Bugio-preto', 'Espécie de primata encontrada em florestas tropicais', 1, 'Pouco preocupante', '2023-10-01 00:00:00', 50000),
+('Pterygoplichthys pardalis', 'Peixe-gato', 'Espécie invasora de peixe-gato', 1, 'Pouco preocupante', '2023-10-01 00:00:00', 1000),
+('Astyanax altiparanae', 'Lambari', 'Peixe nativo de água doce', 2, 'Pouco preocupante', '2023-10-01 00:00:00', 5000),
+('Prochilodus lineatus', 'Curimbatá', 'Peixe nativo de água doce', 3, 'Pouco preocupante', '2023-10-01 00:00:00', 3000);
 
 -- Inserts para a tabela País
 INSERT INTO pais (nome) VALUES ('Brasil');
@@ -265,10 +269,12 @@ INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogF
 INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(77.1025 28.7041)'), 'Parque Nacional de Delhi', 9, TRUE);
 INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(139.6917 35.6895)'), 'Parque Nacional de Shinjuku Gyoen', 10, TRUE);
 INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(-79.3832 43.6532)'), 'Parque Nacional de Toronto', 7, TRUE);
-INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(39.2 -6.2)'), 'Parque Nacional da Caatinga', 1, TRUE),
+INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(39.2 -6.2)'), 'Parque Nacional da Caatinga', 1, TRUE);
 INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(40.5 -7.5)'), 'Área de Caatinga', 1, FALSE);
 INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINTZ(-72.6 42.4 2500)'), 'Montanhas Altas', 1, TRUE);
 INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINTZ(-73.1 42.7 800)'), 'Colinas Baixas', 1, FALSE);
+INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(-60.025 3.119)'),'Área de Desmatamento na Amazônia', 1, FALSE);
+INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(-60.025 3.119)'), 'Rio X', 1, FALSE);
 
 -- Inserts para a tabela Localização-Bioma
 INSERT INTO localizacao_bioma (id_localizacao, id_bioma) VALUES (1, 1);
@@ -304,6 +310,10 @@ INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VA
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (14, 1, 1000);
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (15, 2, 1000);
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (16, 1, 1000);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (17, 15, 200);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (18, 16, 100);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (19, 16, 100);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (20, 16, 100);
 
 -- Inserts para a tabela Doença
 INSERT INTO doenca (nome, descricao) VALUES ('Gripe', 'Doença viral comum que afeta o sistema respiratório');
@@ -322,6 +332,7 @@ INSERT INTO doenca (nome, descricao) VALUES ('Malária', 'Doença parasitária q
 INSERT INTO doenca (nome, descricao) VALUES ('Brucelose', 'Doença bacteriana que afeta bovinos e suínos');
 INSERT INTO doenca (nome, descricao) VALUES ('Toxoplasmose', 'Doença parasitária que afeta mamíferos e aves');
 INSERT INTO doenca (nome, descricao) VALUES ('Doença da Boca', 'Doença infecciosa que afeta a boca das serpentes.');
+INSERT INTO doenca (nome, descricao) VALUES ('Febre Amarela', 'Doença viral transmitida por mosquitos que afeta primatas e humanos');
 
 -- Inserts para a tabela Espécie-Doença
 INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (1, 1, 0.01);
@@ -335,6 +346,7 @@ INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (8, 
 INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (9, 9, 0.40);
 INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (10, 10, 0.50);
 INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (11, 11, 0.3);
+INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (17, 17, 0.15);
 
 -- Inserts para a tabela de Interação Ecológica
 INSERT INTO interacao_ecologica (id_especie1, id_especie2, tipo, descricao) VALUES (1, 2, 'Competição', 'Competição por recursos entre espécies 1 e 2');
@@ -342,6 +354,8 @@ INSERT INTO interacao_ecologica (id_especie1, id_especie2, tipo, descricao) VALU
 INSERT INTO interacao_ecologica (id_especie1, id_especie2, tipo, descricao) VALUES (5, 6, 'Mutualismo', 'Espécie 5 e espécie 6 têm uma relação mutualística');
 INSERT INTO interacao_ecologica (id_especie1, id_especie2, tipo, descricao) VALUES (7, 8, 'Comensalismo', 'Espécie 7 se beneficia da espécie 8 sem prejudicá-la');
 INSERT INTO interacao_ecologica (id_especie1, id_especie2, tipo, descricao) VALUES (9, 10, 'Parasitismo', 'Espécie 9 é parasita da espécie 10');
+INSERT INTO interacao_ecologica (id_especie1, id_especie2, tipo, descricao) VALUES (18, 19, 'Competição', 'Competição por recursos alimentares');
+INSERT INTO interacao_ecologica (id_especie1, id_especie2, tipo, descricao) VALUES (18, 20, 'Predação', 'Predação de ovos e alevinos');
 
 -- Inserts para a tabela Historico-Espécie
 INSERT INTO historico_especie (id_especie, ultimo_status, ultima_populacao, data_hora) VALUES (1, 'Pouco preocupante', 7800000000, '2023-10-01 00:00:00');
@@ -355,5 +369,3 @@ INSERT INTO historico_especie (id_especie, ultimo_status, ultima_populacao, data
 INSERT INTO historico_especie (id_especie, ultimo_status, ultima_populacao, data_hora) VALUES (9, 'Pouco preocupante', 1000000, '2023-10-01 00:00:00');
 INSERT INTO historico_especie (id_especie, ultimo_status, ultima_populacao, data_hora) VALUES (10, 'Pouco preocupante', 1000000, '2023-10-01 00:00:00');
 
-INSERT INTO historico_especie (id_especie, ultimo_status, ultima_populacao, data_hora)
-VALUES (1, 'Endangered', 1500, '2023-10-01 12:00:00');
