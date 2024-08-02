@@ -40,3 +40,17 @@ CREATE TRIGGER trg_atualizar_populacao_total
 AFTER INSERT OR UPDATE ON especie_localizacao
 FOR EACH ROW
 EXECUTE FUNCTION atualizar_populacao_total();
+
+-- VIEW: Riqueza de espécies por localização
+CREATE OR REPLACE VIEW view_especies_por_localizacao AS
+SELECT 
+    l.id AS id_localizacao,
+	l.regiao AS regiao_geografica,
+    l.nome AS nome_localizacao,
+    p.nome AS nome_pais,
+    COUNT(DISTINCT el.id_especie) AS riqueza_especies
+FROM localizacao l
+INNER JOIN especie_localizacao el ON l.id = el.id_localizacao
+INNER JOIN pais p ON l.id_pais = p.id
+GROUP BY l.id, l.nome, p.nome
+ORDER BY l.id;

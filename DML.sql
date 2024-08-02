@@ -50,3 +50,47 @@ INNER JOIN
 WHERE 
     e.nome_cientifico = 'Panthera leo' 
     AND l.area_protegida = TRUE;
+
+
+
+-- Casos de uso (extra):
+
+-- 3. Biólogo Conservacionista Analisando o Status de Conservação de Répteis
+SELECT
+    DISTINCT(e.nome_cientifico),
+    e.nome_comum,
+    e.status_conservacao,
+    e.descricao
+FROM especie e
+INNER JOIN genero g ON e.id_genero = g.id
+INNER JOIN familia f ON g.id_familia = f.id
+INNER JOIN ordem o ON f.id_ordem = o.id
+INNER JOIN especie_localizacao el ON e.id = el.id_especie
+INNER JOIN localizacao l ON el.id_localizacao = l.id
+INNER JOIN localizacao_bioma lb ON l.id = lb.id_localizacao
+INNER JOIN bioma b ON lb.id_bioma = b.id
+WHERE
+    o.nome = 'Squamata'
+    AND f.nome = 'Viperidae'
+    AND b.nome = 'Caatinga'
+    AND (e.status_conservacao = 'Vulnerável' OR e.status_conservacao = 'Em Perigo');
+
+-- 4. Biólogo Evolutivo Estudando a Diversificação de Aves
+SELECT
+    f.nome AS familia,
+    g.nome AS genero,
+    ST_Z(l.regiao::geometry) AS altitude,
+    COUNT(e.id) AS numero_de_especies
+FROM especie e
+INNER JOIN genero g ON e.id_genero = g.id
+INNER JOIN familia f ON g.id_familia = f.id
+INNER JOIN ordem o ON f.id_ordem = o.id
+INNER JOIN classe c ON o.id_classe = c.id
+INNER JOIN especie_localizacao el ON e.id = el.id_especie
+INNER JOIN localizacao l ON el.id_localizacao = l.id
+WHERE c.nome = 'Aves' AND f.nome = 'Tyrannidae'
+GROUP BY f.nome, g.nome, altitude
+ORDER BY altitude, g.nome;
+
+-- Views extras
+SELECT * FROM view_especies_por_localizacao;

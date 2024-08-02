@@ -167,6 +167,7 @@ INSERT INTO classe (nome, id_filo) VALUES ('Saccharomycetes', 6);
 INSERT INTO classe (nome, id_filo) VALUES ('Agaricomycetes', 7);
 INSERT INTO classe (nome, id_filo) VALUES ('Oligohymenophorea', 8);
 INSERT INTO classe (nome, id_filo) VALUES ('Kinetoplastea', 9);
+INSERT INTO classe (nome, id_filo) VALUES ('Reptilia', 1);
 
 -- Inserts para a tabela Ordem
 INSERT INTO ordem (nome, id_classe) VALUES ('Primates', 1);
@@ -179,6 +180,7 @@ INSERT INTO ordem (nome, id_classe) VALUES ('Polypodiales', 6);
 INSERT INTO ordem (nome, id_classe) VALUES ('Saccharomycetales', 7);
 INSERT INTO ordem (nome, id_classe) VALUES ('Agaricales', 8);
 INSERT INTO ordem (nome, id_classe) VALUES ('Hymenostomatida', 9);
+INSERT INTO ordem (nome, id_classe) VALUES ('Squamata', 11);
 
 -- Inserts para a tabela Família
 INSERT INTO familia (nome, id_ordem) VALUES ('Hominidae', 1);
@@ -191,6 +193,8 @@ INSERT INTO familia (nome, id_ordem) VALUES ('Polypodiaceae', 7);
 INSERT INTO familia (nome, id_ordem) VALUES ('Saccharomycetaceae', 8);
 INSERT INTO familia (nome, id_ordem) VALUES ('Agaricaceae', 9);
 INSERT INTO familia (nome, id_ordem) VALUES ('Parameciidae', 10);
+INSERT INTO familia (nome, id_ordem) VALUES ('Viperidae', 11);
+INSERT INTO familia (nome, ordem_id) VALUES ('Tyrannidae', 3);
 
 -- Inserts para a tabela Gênero
 INSERT INTO genero (nome, id_familia) VALUES ('Homo', 1);
@@ -203,6 +207,9 @@ INSERT INTO genero (nome, id_familia) VALUES ('Polypodium', 7);
 INSERT INTO genero (nome, id_familia) VALUES ('Saccharomyces', 8);
 INSERT INTO genero (nome, id_familia) VALUES ('Agaricus', 9);
 INSERT INTO genero (nome, id_familia) VALUES ('Paramecium', 10);
+INSERT INTO genero (nome, id_familia) VALUES ('Bothrops', 11);
+INSERT INTO genero (nome, familia_id) VALUES ('Tyrannus', 12);
+INSERT INTO genero (nome, familia_id) VALUES ('Elaenia', 12);
 
 -- Inserts para a tabela Espécie
 INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
@@ -225,6 +232,12 @@ INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_c
 VALUES ('Agaricus bisporus', 'Cogumelo de Paris', 'Cogumelo comestível', 9, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000);
 INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
 VALUES ('Paramecium caudatum', 'Paramécio', 'Protozoário ciliado', 10, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000);
+INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
+VALUES ('Bothrops erythromelas', 'Jaracuçu', 'Uma serpente venenosa encontrada na Caatinga.', 11, 'Vulnerável', '2024-08-01 00:00:00', 150);
+INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
+VALUES ('Tyrannus savana', 'Tirano-dos-campos', 'Uma ave comum em áreas abertas.', 12, 'Pouco Preocupante', '2024-08-01 00:00:00', 500);
+INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
+VALUES ('Elaenia cristata', 'Maria-cavaleira', 'Uma ave encontrada em áreas montanhosas.', 13, 'Pouco Preocupante', '2024-08-01 00:00:00', 300);
 
 -- Inserts para a tabela País
 INSERT INTO pais (nome) VALUES ('Brasil');
@@ -261,6 +274,10 @@ INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogF
 INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(77.1025 28.7041)'), 'Parque Nacional de Delhi', 9, TRUE);
 INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(139.6917 35.6895)'), 'Parque Nacional de Shinjuku Gyoen', 10, TRUE);
 INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(-79.3832 43.6532)'), 'Parque Nacional de Toronto', 7, TRUE);
+INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(39.2 -6.2)'), 'Parque Nacional da Caatinga', 1, TRUE),
+INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINT(40.5 -7.5)'), 'Área de Caatinga', 1, FALSE);
+INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINTZ(-72.6 42.4 2500)'), 'Montanhas Altas', 1, TRUE);
+INSERT INTO localizacao (regiao, nome, id_pais, area_protegida) VALUES (ST_GeogFromText('SRID=4326;POINTZ(-73.1 42.7 800)'), 'Colinas Baixas', 1, FALSE);
 
 -- Inserts para a tabela Localização-Bioma
 INSERT INTO localizacao_bioma (id_localizacao, id_bioma) VALUES (1, 1);
@@ -273,6 +290,8 @@ INSERT INTO localizacao_bioma (id_localizacao, id_bioma) VALUES (7, 7);
 INSERT INTO localizacao_bioma (id_localizacao, id_bioma) VALUES (8, 8);
 INSERT INTO localizacao_bioma (id_localizacao, id_bioma) VALUES (9, 9);
 INSERT INTO localizacao_bioma (id_localizacao, id_bioma) VALUES (10, 10);
+INSERT INTO localizacao_bioma (id_localizacao, id_bioma) VALUES (11, 6);
+INSERT INTO localizacao_bioma (id_localizacao, id_bioma) VALUES (12, 6);
 
 -- Inserts para a tabela Espécie-Localização
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (1, 1, 100);
@@ -285,6 +304,11 @@ INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VA
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (8, 8, 800);
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (9, 9, 900);
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (10, 10, 1000);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (11, 11, 50);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (11, 12, 100);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (12, 14, 200);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (13, 13, 150);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (13, 14, 100);
 
 -- Inserts para a tabela Doença
 INSERT INTO doenca (nome, descricao) VALUES ('Gripe', 'Doença viral comum que afeta o sistema respiratório');
@@ -302,6 +326,7 @@ INSERT INTO doenca (nome, descricao) VALUES ('Leishmaniose', 'Doença parasitár
 INSERT INTO doenca (nome, descricao) VALUES ('Malária', 'Doença parasitária que afeta humanos e outros primatas');
 INSERT INTO doenca (nome, descricao) VALUES ('Brucelose', 'Doença bacteriana que afeta bovinos e suínos');
 INSERT INTO doenca (nome, descricao) VALUES ('Toxoplasmose', 'Doença parasitária que afeta mamíferos e aves');
+INSERT INTO doenca (nome, descricao) VALUES ('Doença da Boca', 'Doença infecciosa que afeta a boca das serpentes.');
 
 -- Inserts para a tabela Espécie-Doença
 INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (1, 1, 0.01);
@@ -314,6 +339,7 @@ INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (7, 
 INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (8, 8, 0.30);
 INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (9, 9, 0.40);
 INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (10, 10, 0.50);
+INSERT INTO especie_doenca (id_especie, id_doenca, taxa_mortalidade) VALUES (11, 11, 0.3);
 
 -- Inserts para a tabela de Interação Ecológica
 INSERT INTO interacao_ecologica (id_especie1, id_especie2, tipo, descricao) VALUES (1, 2, 'Competição', 'Competição por recursos entre espécies 1 e 2');
