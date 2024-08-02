@@ -212,32 +212,23 @@ INSERT INTO genero (nome, familia_id) VALUES ('Tyrannus', 12);
 INSERT INTO genero (nome, familia_id) VALUES ('Elaenia', 12);
 
 -- Inserts para a tabela Espécie
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Homo sapiens', 'Humano', 'Espécie humana', 1, 'Pouco preocupante', '2023-10-01 00:00:00', 7800000000);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Panthera leo', 'Leão', 'Grande felino', 2, 'Vulnerável', '2023-10-01 00:00:00', 20000);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Turdus merula', 'Melro', 'Pássaro comum', 3, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Carabus auratus', 'Carabídeo dourado', 'Besouro da família Carabidae', 4, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Helix pomatia', 'Caracol', 'Molusco gastrópode', 5, 'Pouco preocupante', '2023-10-01 00:00:00', 500000);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Bryum argenteum', 'Musgo prateado', 'Musgo comum', 6, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Polypodium vulgare', 'Polipódio', 'Feto comum', 7, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Saccharomyces cerevisiae', 'Levedura de cerveja', 'Fungo utilizado na fermentação', 8, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000000);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Agaricus bisporus', 'Cogumelo de Paris', 'Cogumelo comestível', 9, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Paramecium caudatum', 'Paramécio', 'Protozoário ciliado', 10, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Bothrops erythromelas', 'Jaracuçu', 'Uma serpente venenosa encontrada na Caatinga.', 11, 'Vulnerável', '2024-08-01 00:00:00', 150);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Tyrannus savana', 'Tirano-dos-campos', 'Uma ave comum em áreas abertas.', 12, 'Pouco Preocupante', '2024-08-01 00:00:00', 500);
-INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
-VALUES ('Elaenia cristata', 'Maria-cavaleira', 'Uma ave encontrada em áreas montanhosas.', 13, 'Pouco Preocupante', '2024-08-01 00:00:00', 300);
+INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total) VALUES 
+('Homo sapiens', 'Humano', 'Espécie humana', 1, 'Pouco preocupante', '2023-10-01 00:00:00', 7800000000),
+('Panthera leo', 'Leão', 'Grande felino', 2, 'Vulnerável', '2023-10-01 00:00:00', 20000),
+('Turdus merula', 'Melro', 'Pássaro comum', 3, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000),
+('Carabus auratus', 'Carabídeo dourado', 'Besouro da família Carabidae', 4, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000),
+('Helix pomatia', 'Caracol', 'Molusco gastrópode', 5, 'Pouco preocupante', '2023-10-01 00:00:00', 500000),
+('Bryum argenteum', 'Musgo prateado', 'Musgo comum', 6, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000),
+('Polypodium vulgare', 'Polipódio', 'Feto comum', 7, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000),
+('Saccharomyces cerevisiae', 'Levedura de cerveja', 'Fungo utilizado na fermentação', 8, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000000),
+('Agaricus bisporus', 'Cogumelo de Paris', 'Cogumelo comestível', 9, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000),
+('Paramecium caudatum', 'Paramécio', 'Protozoário ciliado', 10, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000),
+('Bothrops erythromelas', 'Jaracuçu', 'Uma serpente venenosa encontrada na Caatinga.', 11, 'Vulnerável', '2024-08-01 00:00:00', 150),
+('Tyrannus savana', 'Tirano-dos-campos', 'Uma ave comum em áreas abertas.', 12, 'Pouco Preocupante', '2024-08-01 00:00:00', 500),
+('Elaenia cristata', 'Maria-cavaleira', 'Uma ave encontrada em áreas montanhosas.', 13, 'Pouco Preocupante', '2024-08-01 00:00:00', 300),
+('Ramphastos toco', 'Tucano-toco', 'Pássaro de grande porte, nativo da Amazônia', 5, 'Pouco preocupante', '2023-10-01 00:00:00', 500000),
+('Panthera onca', 'Onça-pintada', 'Maior felino das Américas, encontrado em florestas tropicais como a Amazônia', 2, 'Vulnerável', '2023-10-01 00:00:00', 15000),
+('Bertholletia excelsa', 'Castanheira-do-pará', 'Árvore amazônica conhecida por suas castanhas comestíveis', 7, 'Vulnerável', '2023-10-01 00:00:00', 200000);
 
 -- Inserts para a tabela País
 INSERT INTO pais (nome) VALUES ('Brasil');
@@ -309,6 +300,10 @@ INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VA
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (12, 14, 200);
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (13, 13, 150);
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (13, 14, 100);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (3, 1, 300);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (14, 1, 1000);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (15, 2, 1000);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (16, 1, 1000);
 
 -- Inserts para a tabela Doença
 INSERT INTO doenca (nome, descricao) VALUES ('Gripe', 'Doença viral comum que afeta o sistema respiratório');
