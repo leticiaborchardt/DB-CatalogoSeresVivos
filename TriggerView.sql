@@ -54,3 +54,19 @@ INNER JOIN especie_localizacao el ON l.id = el.id_localizacao
 INNER JOIN pais p ON l.id_pais = p.id
 GROUP BY l.id, l.nome, p.nome
 ORDER BY l.id;
+
+-- VIEW: Distribuição geográfica de espécies ameaçadas
+SELECT 
+    e.nome_cientifico, 
+    e.nome_comum, 
+    e.status_conservacao, 
+    l.nome AS localizacao, 
+    l.regiao
+FROM 
+    especie e
+INNER JOIN 
+    especie_localizacao el ON e.id = el.id_especie
+INNER JOIN 
+    localizacao l ON el.id_localizacao = l.id
+WHERE 
+    e.status_conservacao IN ('Vulnerável', 'Em Perigo', 'Criticamente em Perigo');   
