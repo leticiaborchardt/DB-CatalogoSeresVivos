@@ -225,6 +225,13 @@ INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_c
 VALUES ('Agaricus bisporus', 'Cogumelo de Paris', 'Cogumelo comestível', 9, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000);
 INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
 VALUES ('Paramecium caudatum', 'Paramécio', 'Protozoário ciliado', 10, 'Pouco preocupante', '2023-10-01 00:00:00', 1000000);
+INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
+VALUES ('Ramphastos toco', 'Tucano-toco', 'Pássaro de grande porte, nativo da Amazônia', 5, 'Pouco preocupante', '2023-10-01 00:00:00', 500000);
+INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
+VALUES ('Panthera onca', 'Onça-pintada', 'Maior felino das Américas, encontrado em florestas tropicais como a Amazônia', 2, 'Vulnerável', '2023-10-01 00:00:00', 15000);
+INSERT INTO especie (nome_cientifico, nome_comum, descricao, id_genero, status_conservacao, data_ultima_observacao, populacao_total)
+VALUES ('Bertholletia excelsa', 'Castanheira-do-pará', 'Árvore amazônica conhecida por suas castanhas comestíveis', 7, 'Vulnerável', '2023-10-01 00:00:00', 200000);
+
 
 -- Inserts para a tabela País
 INSERT INTO pais (nome) VALUES ('Brasil');
@@ -285,6 +292,10 @@ INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VA
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (8, 8, 800);
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (9, 9, 900);
 INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (10, 10, 1000);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (3, 1, 300);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (11, 1, 1000);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (12, 2, 1000);
+INSERT INTO especie_localizacao (id_especie, id_localizacao, populacao_local) VALUES (13, 1, 1000);
 
 -- Inserts para a tabela Doença
 INSERT INTO doenca (nome, descricao) VALUES ('Gripe', 'Doença viral comum que afeta o sistema respiratório');
