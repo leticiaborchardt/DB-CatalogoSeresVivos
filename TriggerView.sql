@@ -37,6 +37,51 @@ AFTER INSERT OR UPDATE ON especie_localizacao
 FOR EACH ROW
 EXECUTE FUNCTION atualizar_populacao_total();
 
+--trigger para atualizar status de conservação
+CREATE OR REPLACE FUNCTION atualizar_status()
+RETURNS TRIGGER AS $$
+DECLARE
+    novo_status VARCHAR;
+BEGIN
+    IF TG_OP = 'UPDATE' AND OLD.populacao_total IS DISTINCT FROM NEW.populacao_total THEN
+        novo_status := CASE
+            WHEN NEW.populacao_total = 0 THEN 'Extinta'
+            WHEN NEW.populacao_total BETWEEN 1 AND 50 THEN 'Criticamente em Perigo'
+            WHEN NEW.populacao_total BETWEEN 51 AND 250 THEN 'Em Perigo'
+            WHEN NEW.populacao_total BETWEEN 251 AND 1000 THEN 'Vulnerável'
+            WHEN NEW.populacao_total BETWEEN 1001 AND 5000 THEN 'Quase Ameaçada'
+            WHEN NEW.populacao_total > 5000 THEN 'Pouco Preocupante'
+            ELSE NEW.status_conservacao
+        END;
+		UPDATE especie
+		SET status_conservacao = novo_status
+		WHERE id = NEW.id;
+    END IF;
+
+    IF TG_OP = 'INSERT' THEN
+        novo_status := CASE
+            WHEN NEW.populacao_total = 0 THEN 'Extinta'
+            WHEN NEW.populacao_total BETWEEN 1 AND 50 THEN 'Criticamente em Perigo'
+            WHEN NEW.populacao_total BETWEEN 51 AND 250 THEN 'Em Perigo'
+            WHEN NEW.populacao_total BETWEEN 251 AND 1000 THEN 'Vulnerável'
+            WHEN NEW.populacao_total BETWEEN 1001 AND 5000 THEN 'Quase Ameaçada'
+            WHEN NEW.populacao_total > 5000 THEN 'Pouco Preocupante'
+            ELSE NULL
+        END;  
+		UPDATE especie
+		SET status_conservacao = novo_status
+		WHERE id = NEW.id;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_atualizar_status
+AFTER INSERT OR UPDATE ON especie
+FOR EACH ROW
+EXECUTE FUNCTION atualizar_status();
+
 -- TRIGGER: Verifica inserções ou atualizações de espécies e emite um alerta caso o status de conservação esteja em perigo.
 CREATE OR REPLACE FUNCTION verificar_status_conservacao() RETURNS trigger AS $$
 BEGIN
@@ -85,3 +130,24 @@ INNER JOIN
     localizacao l ON el.id_localizacao = l.id
 WHERE 
     e.status_conservacao IN ('Vulnerável', 'Em Perigo', 'Criticamente em Perigo');   
+
+--VIEW: espécies endêmicas de um país
+CREATE OR REPLACE VIEW view_especies_endemicas_pais AS
+SELECT 
+    e.nome_comum AS especie,
+	pa.nome AS pais
+FROM pais pa
+INNER JOIN localizacao l ON l.id_pais = pa.id
+INNER JOIN especie_localizacao el ON el.id_localizacao = l.id
+INNER JOIN especie e ON e.id = el.id_especie
+WHERE
+	NOT EXISTS (
+		SELECT 1
+		FROM especie_localizacao el2
+		INNER JOIN localizacao l2 ON l2.id = el2.id_localizacao
+		INNER JOIN pais pa2 ON pa2.id = l2.id_pais
+		WHERE el2.id_especie = e.id
+		AND l2.id_pais != pa.id
+)
+GROUP BY pa.nome, e.nome_comum
+ORDER BY pa.nome;
