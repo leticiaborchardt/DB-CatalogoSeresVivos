@@ -369,3 +369,15 @@ INSERT INTO historico_especie (id_especie, ultimo_status, ultima_populacao, data
 INSERT INTO historico_especie (id_especie, ultimo_status, ultima_populacao, data_hora) VALUES (9, 'Pouco preocupante', 1000000, '2023-10-01 00:00:00');
 INSERT INTO historico_especie (id_especie, ultimo_status, ultima_populacao, data_hora) VALUES (10, 'Pouco preocupante', 1000000, '2023-10-01 00:00:00');
 
+-- Atualizar o registro existente na tabela especie para acionar o trigger
+UPDATE especie
+SET status_conservacao = 'Criticamente em Perigo', 
+    populacao_total = 50, 
+    data_ultima_observacao = '2023-10-02 00:00:00'
+WHERE id = 1;
+
+-- Verificar se o registro foi inserido na tabela especie
+SELECT * FROM especie WHERE id = 1;
+
+-- Verificar se o registro foi inserido na tabela historico_especie
+SELECT * FROM historico_especie WHERE id_especie = 1;

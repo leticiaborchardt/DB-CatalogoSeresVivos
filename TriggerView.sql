@@ -1,20 +1,34 @@
 SET search_path TO SeresVivos;
 
--- TRIGGER: Atualiza a data de observação conforme última atualização no registro
-CREATE OR REPLACE FUNCTION update_data_ultima_observacao()
-RETURNS TRIGGER AS $$
+-- Função para atualizar data_ultima_observacao e inserir no historico_especie
+CREATE OR REPLACE FUNCTION atualizar_especie_e_historico()
+    RETURNS TRIGGER AS $$
 BEGIN
+
+    -- Desabilitar temporariamente o trigger
+    PERFORM pg_catalog.set_config('session_replication_role', 'replica', true);
+
+    -- Atualiza data_ultima_observacao na tabela especie
     UPDATE especie
-    SET data_ultima_observacao = NEW.data_hora
-    WHERE id = NEW.id_especie;
+    SET data_ultima_observacao = NEW.data_ultima_observacao
+    WHERE id = NEW.id;
+
+    -- Reabilitar o trigger
+    PERFORM pg_catalog.set_config('session_replication_role', 'origin', true);
+
+    -- Insere novo registro na tabela historico_especie
+    INSERT INTO historico_especie (id_especie, ultimo_status, ultima_populacao, data_hora)
+    VALUES (NEW.id, NEW.status_conservacao, NEW.populacao_total, NEW.data_ultima_observacao);
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE TRIGGER trg_update_data_ultima_observacao
-AFTER INSERT ON historico_especie
-FOR EACH ROW
-EXECUTE FUNCTION update_data_ultima_observacao();
+-- Trigger para chamar a função após atualização na tabela especie
+CREATE OR REPLACE TRIGGER trg_atualizar_especie_e_historico
+    AFTER UPDATE ON especie
+    FOR EACH ROW
+EXECUTE FUNCTION atualizar_especie_e_historico();
 
 -- TRIGGER: atualiza o campo populacao_total na tabela especie conforme populacao_local adicionada nas localizações da espécie
 CREATE OR REPLACE FUNCTION atualizar_populacao_total()
