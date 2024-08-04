@@ -8,17 +8,17 @@ BEGIN
     -- Desabilitar temporariamente o trigger
     PERFORM pg_catalog.set_config('session_replication_role', 'replica', true);
 
-    -- Atualiza data_ultima_observacao na tabela especie
+    -- Atualiza data_ultima_observacao na tabela especie com a data atual
     UPDATE especie
-    SET data_ultima_observacao = NEW.data_ultima_observacao
+    SET data_ultima_observacao = current_timestamp
     WHERE id = NEW.id;
 
     -- Reabilitar o trigger
     PERFORM pg_catalog.set_config('session_replication_role', 'origin', true);
 
-    -- Insere novo registro na tabela historico_especie
+    -- Insere novo registro na tabela historico_especie com a data atual
     INSERT INTO historico_especie (id_especie, ultimo_status, ultima_populacao, data_hora)
-    VALUES (NEW.id, NEW.status_conservacao, NEW.populacao_total, NEW.data_ultima_observacao);
+    VALUES (NEW.id, NEW.status_conservacao, NEW.populacao_total, current_timestamp);
 
     RETURN NEW;
 END;
