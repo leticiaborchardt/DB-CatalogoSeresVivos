@@ -195,6 +195,18 @@ WHERE c.nome = 'Aves' AND f.nome = 'Tyrannidae'
 GROUP BY f.nome, g.nome, altitude
 ORDER BY altitude, g.nome;
 
+-- 6. Média de Altitude das Espécies de Aves
+SELECT e.nome_cientifico, AVG(ST_Z(l.regiao::geometry)) AS media_altitude
+FROM especie e
+INNER JOIN especie_localizacao el ON e.id = el.id_especie
+INNER JOIN localizacao l ON el.id_localizacao = l.id
+INNER JOIN genero g ON e.id_genero = g.id
+INNER JOIN familia f ON g.id_familia = f.id
+INNER JOIN ordem o ON f.id_ordem = o.id
+INNER JOIN classe c ON o.id_classe = c.id
+WHERE ST_Z(l.regiao::geometry) IS NOT NULL AND c.nome = 'Aves'
+GROUP BY e.nome_cientifico;
+
 -- Views extras
 SELECT * FROM view_especies_por_localizacao;
 SELECT * FROM view_regiao_geografica_especies_ameacadas;
