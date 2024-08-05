@@ -210,3 +210,32 @@ GROUP BY e.nome_cientifico;
 -- Views extras
 SELECT * FROM view_especies_por_localizacao;
 SELECT * FROM view_regiao_geografica_especies_ameacadas;
+
+-- 7. Analisando a Eficácia de Áreas Protegidas:
+SELECT
+	e.nome_comum AS nome_comum_especie,
+	mpp.taxa_declinio AS declinio_area_protegida,
+	mpc.taxa_declinio AS declinio_area_comum
+FROM
+	especie e
+INNER JOIN
+	mudanca_populacional_area_protegida mpp ON mpp.id_especie = e.id
+INNER JOIN 
+	mudanca_populacional_area_comum mpc ON mpc.id_especie = e.id
+
+
+-- 9. Analisando a Diversidade Microbiana em Diferentes Ambientes:
+SELECT b.nome AS bioma, COUNT(e.id) AS diversidade_bacterias
+FROM Especie e
+INNER JOIN Genero gen ON gen.id = e.id_genero
+INNER JOIN Familia f ON f.id = gen.id_familia
+INNER JOIN Ordem o ON f.id_ordem = o.id
+INNER JOIN Classe cla ON cla.id = o.id_classe
+INNER JOIN filo fi ON fi.id = cla.id_filo
+INNER JOIN reino r ON fi.id_reino = r.id
+INNER JOIN especie_localizacao el ON e.id = el.id_especie
+INNER JOIN Localizacao l ON el.id_localizacao = l.id
+INNER JOIN localizacao_bioma lb ON lb.id_localizacao = l.id
+INNER JOIN Bioma b ON lb.id_bioma = b.id
+WHERE r.nome = 'Bacteria'
+GROUP BY b.nome

@@ -165,3 +165,38 @@ WHERE
 )
 GROUP BY pa.nome, e.nome_comum
 ORDER BY pa.nome;
+
+-- Views criadas para a resolução do caso de uso 7
+CREATE OR REPLACE VIEW mudanca_populacional AS
+SELECT 
+    he.id_especie AS id_especie,
+    e.nome_comum AS nome_comum,
+    he.ultima_populacao AS ultima_populacao,
+    e.populacao_total AS populacao_atual
+FROM especie e
+INNER JOIN historico_especie he ON he.id_especie = e.id
+WHERE he.data_hora = (SELECT MAX(he2.data_hora) 
+                    FROM historico_especie he2 
+                    WHERE he2.id_especie = he.id_especie);
+
+CREATE OR REPLACE VIEW mudanca_populacional_area_protegida AS
+SELECT
+	mp.nome_comum, mp.id_especie,
+	ROUND(
+	   (((mp.populacao_atual::DECIMAL - mp.ultima_populacao::DECIMAL) / mp.ultima_populacao)*100), 2)
+	AS taxa_declinio
+FROM mudanca_populacional mp
+INNER JOIN especie_localizacao el ON el.id_especie = mp.id_especie
+INNER JOIN localizacao l ON el.id_localizacao = l.id
+WHERE l.area_protegida = TRUE AND mp.populacao_atual < 5000;
+
+CREATE OR REPLACE VIEW mudanca_populacional_area_comum AS
+SELECT
+	mp.nome_comum, mp.id_especie,
+	ROUND(
+	   (((mp.populacao_atual::DECIMAL - mp.ultima_populacao::DECIMAL) / mp.ultima_populacao)*100), 2)
+	AS taxa_declinio
+FROM mudanca_populacional mp
+INNER JOIN especie_localizacao el ON el.id_especie = mp.id_especie
+INNER JOIN localizacao l ON el.id_localizacao = l.id
+WHERE l.area_protegida = FALSE AND mp.populacao_atual < 5000;
